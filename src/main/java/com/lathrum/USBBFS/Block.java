@@ -1,3 +1,5 @@
+package com.lathrum.USBBFS;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -8,13 +10,15 @@ public class Block {
   private long timestamp;
   private String hash;
   private String previousHash;
-  private String data; //replace string input data with file input
+  private String name;
+  private String data;
   private int nonce;
 	
-  public Block(int index, long timestamp, String previousHash, String data) {
+  public Block(int index, long timestamp, String previousHash, String name, String data) {
     this.index = index;
     this.timestamp = timestamp;
     this.previousHash = previousHash;
+    this.name = name;
     this.data = data;
     nonce = 0;
     hash = Block.calculateHash(this);
@@ -36,19 +40,23 @@ public class Block {
     return previousHash;
   }
 
+  public String getName() {
+    return name;
+  }
+
   public String getData() {
     return data;
   }
 
   public String str() {
-    return index + timestamp + previousHash + data + nonce;
+    return index + timestamp + previousHash + name + data + nonce;
   }
 
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("Block #").append(index).append(" [previousHash : ").append(previousHash).append(", ").
-    append("timestamp : ").append(new Date(timestamp)).append(", ").append("data : ").append(data).append(", ").
-    append("hash : ").append(hash).append("]");
+    append("timestamp : ").append(new Date(timestamp)).append(", ").append("name : ").append(name).append(", ").
+    append("data : ").append(data).append(", ").append("hash : ").append(hash).append("]");
     return builder.toString();
   }
 	

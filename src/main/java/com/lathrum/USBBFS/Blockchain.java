@@ -1,3 +1,5 @@
+package com.lathrum.USBBFS;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class Blockchain {
     this.difficulty = difficulty;
     blocks = new ArrayList<>();
     // create the first block
-    Block b = new Block(0, System.currentTimeMillis(), null, "First Block"); 
+    Block b = new Block(0, System.currentTimeMillis(), null, "First Block", null); 
     b.mineBlock(difficulty);
     blocks.add(b);
   }
@@ -19,14 +21,18 @@ public class Blockchain {
     return difficulty;
   }
 
+  public int getNumberOfBlocks() {
+    return blocks.size();
+  }
+
   public Block latestBlock() {
     return blocks.get(blocks.size() - 1);
   }
 
-  public Block newBlock(String data) {
+  public Block newBlock(String name, String data) {
     Block latestBlock = latestBlock();
     return new Block(latestBlock.getIndex() + 1, System.currentTimeMillis(),
-        latestBlock.getHash(), data);
+        latestBlock.getHash(), name, data);
   }
 
   public void addBlock(Block b) {
@@ -92,6 +98,24 @@ public class Blockchain {
     }
 
     return true;
+  }
+
+  public String findBlockHash(String name) {
+    for (int i = blocks.size()-1; i >= 0; i--) {
+      if (blocks.get(i).getName().matches(name)){
+        return blocks.get(i).getHash();
+      }
+    }
+    return null;
+  }
+
+  public String findBlockData(String name) {
+    for (int i = blocks.size()-1; i >= 0; i--) {
+      if (blocks.get(i).getName().matches(name)){
+        return blocks.get(i).getData();
+      }
+    }
+    return null;
   }
 
   public String toString() {
