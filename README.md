@@ -10,6 +10,11 @@ This project was submitted for judging under the following categories:
 - Most "Useless" Hack
 - Most "Extra" Hack
 
+This project won the following categories:
+
+- Most "Extra" Hack
+- Best Rookie Hack
+
 # Team Members
 
 - Dylan Lathrum
